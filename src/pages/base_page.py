@@ -15,16 +15,14 @@ class BasePage:
         self.height = self.window_size['height']
 
     def take_exception_screenshot(self):
-        """
-        Делает скриншот браузера в момент возникновения ошибки.
-        Для читаемости наименования скриншота.
-        Принимает на вход название метода, где произошла ошибка."""
+        """ Делает скриншот и прикрепляет в allure отчет."""
         allure.attach(
             body=self.driver.get_screenshot_as_png(),
             name='exception_screenshot',
             attachment_type=allure.attachment_type.PNG)
 
-    def wait(self, timeout=10):
+    def wait(self, timeout=1):
+        """ Метод таймаута ожидания"""
         return WebDriverWait(self.driver, timeout=timeout)
 
     def el_until_clickable(self, locator, timeout=2):
@@ -38,6 +36,7 @@ class BasePage:
 
     def fill_field(self, locator, value, timeout=2):
         """
+        Заполнить поле значением.
         :locator - элемент, в который заполнять
         :value - значение, которым заполнить элемент
         :timeout - timeout ожидания элемента
@@ -81,34 +80,3 @@ class BasePage:
         sleep(1)
         for i in range(n):
             self.driver.swipe(width1, height1, width2, height1, t)
-
-    # def create_habit(self):
-    #     self.el_until_clickable(Locators.OPEN_CREATE_HABIT_BTN, 3).click()
-
-    # def open_first_habit(self):
-    #     """ Открыть первую привычку."""
-    #     self.el_until_clickable(Locators.OPEN_FIRST_HABIT).click()
-    #     return self
-    #
-    # def click_del_habit(self):
-    #     """ Нажать удалить привычку в карточке привычки."""
-    #     self.el_until_clickable(Locators.DEL_HABIT_BTN).click()
-    #     print('Нажал на удалить привычку в карточке')
-    #     return self
-    #
-    # def confirm_del_habit(self):
-    #     """ Подтвердит удаление привычки."""
-    #     self.el_until_clickable(Locators.CONFIRM_DEL_HABIT_BTN).click()
-    #     print('Нажал подтвердить удаление привычки в карточке')
-    #     return self
-    #
-    # def del_habit(self):
-    #     """ Удалить привычку в карточке привычки."""
-    #     self.click_del_habit()
-    #     self.confirm_del_habit()
-    #     return self
-    #
-    # def click_save_habit(self):
-    #     """ Нажать сохранить привычку."""
-    #     self.el_until_clickable(Locators.SAVE_CREATED_HABIT_BTN).click()
-    #     return self
