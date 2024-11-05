@@ -12,7 +12,7 @@ pipeline {
                     script {
                         // Сборка Docker-образа
                         sh '''
-                        docker build -t ${DOCKER_IMAGE} .
+                        docker build -t ${DOCKER_IMAGE}  .
                         '''
                     }
                 }
@@ -31,6 +31,16 @@ pipeline {
                         // Запуск Docker-контейнера
                         sh '''
                         docker run --name ${DOCKER_CONTAINER} -d ${DOCKER_IMAGE}  # Замените на вашу команду запуска, если необходимо
+                        docker exec ${DOCKER_CONTAINER}
+
+                        sudo rm .env
+                        sudo touch .env
+                        sudo chmod 666 .env
+
+                        echo "BROWSERSTACK_USERNAME=${BROWSERSTACK_USERNAME}" >> .env
+                        echo "BROWSERSTACK_ACCESS_KEY=${BROWSERSTACK_ACCESS_KEY}" >> .env
+                        echo "LOGIN=${LOGIN}" >> .env
+                        echo "PASSWORD=${PASSWORD}" >> .env
                         '''
                     }
                 }
