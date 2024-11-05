@@ -38,7 +38,7 @@ pipeline {
                         echo 'BROWSERSTACK_ACCESS_KEY=${BROWSERSTACK_ACCESS_KEY}' >> .env &&
                         echo 'LOGIN=${LOGIN}' >> .env &&
                         echo 'PASSWORD=${PASSWORD}' >> .env &&
-                        cat .env"
+                        cat .env && cat browserstack.yml"
                         '''
                     }
                 }
