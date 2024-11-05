@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     // Запустите тесты внутри контейнера
-                    sh 'docker exec ${DOCKER_CONTAINER} pytest .\\test\\test_start_page.py:TestStartPage:test_click_skip_onboarding'
+                    sh 'docker exec ${DOCKER_CONTAINER} pytest ./test/test_start_page.py:TestStartPage:test_click_skip_onboarding'
                 }
             }
         }
