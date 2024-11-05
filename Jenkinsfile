@@ -32,7 +32,7 @@ pipeline {
         stage('Run Tests') {  // Стадия для запуска тестов
             steps {
                 script {
-                    sh 'docker exec ${DOCKER_CONTAINER} pytest ./test/test_start_page.py:TestStartPage:test_click_skip_onboarding' // Запустите тесты внутри контейнера
+                    sh 'docker exec ${DOCKER_CONTAINER} browserstack-sdk pytest /test/test_habit.py:TestStartPage:test_click_skip_onboarding' // Запустите тесты внутри контейнера
                 }
             }
         }
