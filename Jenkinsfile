@@ -31,7 +31,6 @@ pipeline {
                         // Запуск Docker-контейнера
                         sh '''
                         docker run --name ${DOCKER_CONTAINER} -d ${DOCKER_IMAGE}  # Замените на вашу команду запуска, если необходимо
-                        docker exec -it ${DOCKER_CONTAINER} bash
 
                         sudo rm .env
                         sudo touch .env
