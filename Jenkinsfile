@@ -64,12 +64,12 @@ pipeline {
                 }
             }
     }
-    post {
-        failure {
-            echo 'Final cleanup in post section...'
-            // В данном случае мы также можем делать финальную очистку
-            sh 'docker stop ${DOCKER_CONTAINER} || true'
-            sh 'docker rm ${DOCKER_CONTAINER} || true'
-        }
-    }
+//     post {
+//         failure {
+//             echo 'Final cleanup in post section...'
+//             // В данном случае мы также можем делать финальную очистку
+//             sh 'docker stop ${DOCKER_CONTAINER} || true'
+//             sh 'docker rm ${DOCKER_CONTAINER} || true'
+//         }
+//     }
 }
