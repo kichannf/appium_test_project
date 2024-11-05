@@ -38,7 +38,8 @@ pipeline {
                         echo 'BROWSERSTACK_ACCESS_KEY=${BROWSERSTACK_ACCESS_KEY}' >> .env &&
                         echo 'LOGIN=${LOGIN}' >> .env &&
                         echo 'PASSWORD=${PASSWORD}' >> .env &&
-                        cat .env && cat browserstack.yml"
+                        cat .env && cat browserstack.yml" &&
+                        browserstack-sdk pytest ./test/test_habit.py:TestStartPage:test_click_skip_onboarding
                         '''
                     }
                 }
