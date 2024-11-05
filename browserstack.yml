@@ -1,7 +1,7 @@
-userName: ${BROWSERSTACK_USERNAME}
-accessKey: ${BROWSERSTACK_ACCESS_KEY}
-#userName: nikki_mSdyPW
-#accessKey: Ae6uoWXuzi8Pq9p4pLw4
+#userName: ${BROWSERSTACK_USERNAME}
+#accessKey: ${BROWSERSTACK_ACCESS_KEY}
+userName: nikki_mSdyPW
+accessKey: Ae6uoWXuzi8Pq9p4pLw4
 framework: pytest
 app: .\src\app\Habitica_4.3.3_apkcombo.com.apk
 #app: C:\kichan\dev\appiumTestProject\src\app\Habitica_4.3.3_apkcombo.com.apk
