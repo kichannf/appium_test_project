@@ -46,14 +46,4 @@ pipeline {
                 // Здесь ваши команды для развёртывания приложения
             }
         }
-    }
-
-    post {
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed!'
-        }
-    }
 }
