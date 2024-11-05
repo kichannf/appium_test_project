@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'my_app_image'  // Имя для вашего Docker-образа
         DOCKER_CONTAINER = 'my_app_container'  // Имя для вашего Docker-контейнера
+        LOGIN = credentials('LOGIN')
     }
 
     stages {
@@ -17,6 +18,13 @@ pipeline {
                     }
                 }
             }
+        stage('print env') {
+            steps {
+                script{
+                sh ''' echo ${LOGIN} '''
+                }
+            }
+        }
 
         stage('Run Docker Container') {
                 steps {
