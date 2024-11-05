@@ -14,5 +14,5 @@ COPY . .
 #    echo "LOGIN=${LOGIN}" >> .env && \
 #    echo "PASSWORD=${PASSWORD}" >> .env
 
-RUN cat .env
+#RUN cat .env
 CMD ["browserstack-sdk", "pytest", "--s", ".\test\test_start_page.py:TestStartPage:test_click_skip_onboarding" ]
