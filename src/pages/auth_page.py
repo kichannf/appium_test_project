@@ -8,6 +8,9 @@ from src.pages.base_page import BasePage
 
 class AuthPage(BasePage):
     """ Класс от старта до авторизации."""
+    def click_ok_for_browser_stack(self):
+        self.click(('xpath', '//android.widget.Button[@text="OK"]'), 4)
+
     @allure.step('Ввод логина: {login}')
     def set_login(self, login):
         self.el_until_clickable(
@@ -31,7 +34,7 @@ class AuthPage(BasePage):
 
     @allure.step('Нажать кнопку "Skip" для пропуска онбоардинга.')
     def skip_onboarding_by_skip_btn(self):
-        self.el_until_clickable(AuthPageLocators.SKIP_BTN, 2).click()
+        self.el_until_clickable(AuthPageLocators.SKIP_BTN, 4).click()
         return self
 
     @allure.step(

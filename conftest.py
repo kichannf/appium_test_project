@@ -12,16 +12,18 @@ from src.pages.user_page import UserPage
 capabilities = dict(
     platformName='Android',
     automationName='uiautomator2',
-    deviceName='Android',
+    #deviceName='Android',
+    deviceName='Samsung Galaxy S22 Ultra',
     appPackage='com.habitrpg.android.habitica',
     appActivity='.ui.activities.MainActivity',
-    waitForIdleTimeout=0,
-    app='C:\\kichan\dev\\appiumTestProject\\src\\app\\Habitica_4.3.3_apkcombo.com.apk'
+    waitForIdleTimeout=0 ,
+    # app='C:\\kichan\dev\\appiumTestProject\\src\\app\\Habitica_4.3.3_apkcombo.com.apk'
 )
 
 capabilities_options = UiAutomator2Options().load_capabilities(capabilities)
 
 appium_server_url = 'http://localhost:4723'
+browserstack_server_url = '"https://hub.browserstack.com/wd/hub"'
 
 
 @pytest.fixture(autouse=True, scope='session')
@@ -31,11 +33,17 @@ def load_env():
 @pytest.fixture()
 def driver():
     web_driver = webdriver.Remote(
-        appium_server_url,
+        browserstack_server_url,
         options=capabilities_options)
     yield web_driver
     if web_driver:
         web_driver.quit()
+    #
+    # driver = webdriver.Remote(browserstack_server_url, session_capabilities)
+    # request.node._driver = driver
+    # request.instance.driver = driver
+    # yield driver
+    # driver.quit()
 
 
 @pytest.fixture()

@@ -6,6 +6,7 @@ class TestStartPage:
     @allure.story('Стартовая страница')
     @allure.title('Пропустить онбоардинг кнопкой "Skip"')
     def test_click_skip_onboarding(self, start_page):
+        start_page.click_ok_for_browser_stack()
         start_page.skip_onboarding_by_skip_btn()
         start_page.check_start_page_is_open()
 
