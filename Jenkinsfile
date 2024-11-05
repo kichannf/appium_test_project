@@ -56,4 +56,5 @@ pipeline {
             sh 'docker stop ${DOCKER_CONTAINER} || true'
             sh 'docker rm ${DOCKER_CONTAINER} || true'
         }
+    }
 }
