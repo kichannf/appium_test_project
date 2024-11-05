@@ -17,7 +17,7 @@ pipeline {
                     }
                 }
             }
-        stage('print env') {
+        stage('Print env') {
             steps {
                 script{
                 sh ''' echo ${params.LOGIN} '''
