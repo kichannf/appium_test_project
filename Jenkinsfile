@@ -20,7 +20,7 @@ pipeline {
         stage('Print env') {
             steps {
                 script{
-                sh ''' echo ${params.LOGIN} '''
+                sh ''' echo "${LOGIN}" '''
                 }
             }
         }
