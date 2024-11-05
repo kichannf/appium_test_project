@@ -32,8 +32,11 @@ pipeline {
         stage('Run Tests') {  // Стадия для запуска тестов
             steps {
                 script {
-                    // Запустите тесты внутри контейнера
-                    sh 'docker exec ${DOCKER_CONTAINER} pytest ./test/test_start_page.py:TestStartPage:test_click_skip_onboarding'
+                    try {
+                        sh 'docker exec ${DOCKER_CONTAINER} pytest ./test/test_start_page.py:TestStartPage:test_click_skip_onboarding' // Запустите тесты внутри контейнера
+                    } catch
+
+
                 }
             }
         }
@@ -49,5 +52,12 @@ pipeline {
                     }
                 }
             }
+    }
+    post {
+        always {
+            echo 'Final cleanup in post section...'
+            // В данном случае мы также можем делать финальную очистку
+            sh 'docker stop ${DOCKER_CONTAINER} || true'
+            sh 'docker rm ${DOCKER_CONTAINER} || true'
         }
 }
