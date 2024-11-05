@@ -32,16 +32,13 @@ pipeline {
                         sh '''
                         docker run --name ${DOCKER_CONTAINER} -d ${DOCKER_IMAGE}  # Замените на вашу команду запуска, если необходимо
 
-                        sudo rm .env
-                        sudo touch .env
-                        sudo chmod 666 .env
-
-                        echo "BROWSERSTACK_USERNAME=${BROWSERSTACK_USERNAME}" >> .env
-                        echo "BROWSERSTACK_ACCESS_KEY=${BROWSERSTACK_ACCESS_KEY}" >> .env
-                        echo "LOGIN=${LOGIN}" >> .env
-                        echo "PASSWORD=${PASSWORD}" >> .env
-
-                        cat .env
+                        docker exec ${DOCKER_CONTAINER} sh -c "
+                        touch .env && chmod 666 .env &&
+                        echo 'BROWSERSTACK_USERNAME=${BROWSERSTACK_USERNAME}' >> .env &&
+                        echo 'BROWSERSTACK_ACCESS_KEY=${BROWSERSTACK_ACCESS_KEY}' >> .env &&
+                        echo 'LOGIN=${LOGIN}' >> .env &&
+                        echo 'PASSWORD=${PASSWORD}' >> .env &&
+                        cat .env"
                         '''
                     }
                 }
