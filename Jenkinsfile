@@ -31,6 +31,14 @@ pipeline {
                 sh ''' docker run --name ${DOCKER_CONTAINER} -d ${DOCKER_IMAGE} '''
                 }
             }
+            post {
+                failure {
+                    echo 'Final cleanup in post section...'
+                    // В данном случае мы также можем делать финальную очистку
+                    sh 'docker stop ${DOCKER_CONTAINER} || true'
+                    sh 'docker rm ${DOCKER_CONTAINER} || true'
+                }
+            }
         }
 
 //         stage('Run Docker Container') {
