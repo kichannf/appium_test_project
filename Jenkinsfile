@@ -44,33 +44,33 @@ pipeline {
                 }
             }
 
-//         stage('Run Tests') {  // Стадия для запуска тестов
-//             steps {
-//                 script {
-//                     sh ''' docker exec ${DOCKER_CONTAINER} browserstack-sdk pytest ./test/test_habit.py:TestStartPage:test_click_skip_onboarding''' // Запустите тесты внутри контейнера
-//                 }
-//             }
-//             post {
-//                 failure {
-//                     echo 'Final cleanup in post section...'
-//                     // В данном случае мы также можем делать финальную очистку
-//                     sh 'docker stop ${DOCKER_CONTAINER} || true'
-//                     sh 'docker rm ${DOCKER_CONTAINER} || true'
-//                 }
-//             }
-//         }
-//
-//         stage('Stop and Remove Container') {
-//                 steps {
-//                     script {
-//                         // Остановка и удаление контейнера
-//                         sh '''
-//                         docker stop ${DOCKER_CONTAINER} || true  # Остановка контейнера (если он еще работает)
-//                         docker rm ${DOCKER_CONTAINER} || true    # Удаление контейнера
-//                         '''
-//                     }
-//                 }
-//             }
+        stage('Run Tests') {  // Стадия для запуска тестов
+            steps {
+                script {
+                    sh ''' docker exec ${DOCKER_CONTAINER} browserstack-sdk pytest ./test/test_habit.py:TestStartPage:test_click_skip_onboarding''' // Запустите тесты внутри контейнера
+                }
+            }
+            post {
+                failure {
+                    echo 'Final cleanup in post section...'
+                    // В данном случае мы также можем делать финальную очистку
+                    sh 'docker stop ${DOCKER_CONTAINER} || true'
+                    sh 'docker rm ${DOCKER_CONTAINER} || true'
+                }
+            }
+        }
+
+        stage('Stop and Remove Container') {
+                steps {
+                    script {
+                        // Остановка и удаление контейнера
+                        sh '''
+                        docker stop ${DOCKER_CONTAINER} || true  # Остановка контейнера (если он еще работает)
+                        docker rm ${DOCKER_CONTAINER} || true    # Удаление контейнера
+                        '''
+                    }
+                }
+            }
      }
 //     post {
 //         failure {
