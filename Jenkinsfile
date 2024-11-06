@@ -26,39 +26,47 @@ pipeline {
         }
 
         stage('Run Docker Container') {
-                steps {
-                    script {
-                        // Запуск Docker-контейнера
-                        sh '''
-                        docker run --name ${DOCKER_CONTAINER} -d ${DOCKER_IMAGE}  # Замените на вашу команду запуска, если необходимо
-
-                        docker exec ${DOCKER_CONTAINER} sh -c "
-                        touch .env && chmod 666 .env &&
-                        echo 'BROWSERSTACK_USERNAME=${BROWSERSTACK_USERNAME}' >> .env &&
-                        echo 'BROWSERSTACK_ACCESS_KEY=${BROWSERSTACK_ACCESS_KEY}' >> .env &&
-                        echo 'LOGIN=${LOGIN}' >> .env &&
-                        echo 'PASSWORD=${PASSWORD}' >> .env &&
-                        cat .env && cat browserstack.yml"
-                        '''
-                    }
-                }
-            }
-
-        stage('Run Tests') {  // Стадия для запуска тестов
             steps {
-                script {
-                    sh ''' docker exec ${DOCKER_CONTAINER} browserstack-sdk pytest ./test/test_habit.py:TestStartPage:test_click_skip_onboarding''' // Запустите тесты внутри контейнера
-                }
-            }
-            post {
-                failure {
-                    echo 'Final cleanup in post section...'
-                    // В данном случае мы также можем делать финальную очистку
-                    sh 'docker stop ${DOCKER_CONTAINER} || true'
-                    sh 'docker rm ${DOCKER_CONTAINER} || true'
+                script{
+                sh ''' docker run --name ${DOCKER_CONTAINER} -d ${DOCKER_IMAGE} '''
                 }
             }
         }
+
+//         stage('Run Docker Container') {
+//                 steps {
+//                     script {
+//                         // Запуск Docker-контейнера
+//                         sh '''
+//                         docker run --name ${DOCKER_CONTAINER} -d ${DOCKER_IMAGE}  # Замените на вашу команду запуска, если необходимо
+//
+//                         docker exec ${DOCKER_CONTAINER} sh -c "
+//                         touch .env && chmod 666 .env &&
+//                         echo 'BROWSERSTACK_USERNAME=${BROWSERSTACK_USERNAME}' >> .env &&
+//                         echo 'BROWSERSTACK_ACCESS_KEY=${BROWSERSTACK_ACCESS_KEY}' >> .env &&
+//                         echo 'LOGIN=${LOGIN}' >> .env &&
+//                         echo 'PASSWORD=${PASSWORD}' >> .env &&
+//                         cat .env && cat browserstack.yml"
+//                         '''
+//                     }
+//                 }
+//             }
+
+//         stage('Run Tests') {  // Стадия для запуска тестов
+//             steps {
+//                 script {
+//                     sh ''' docker exec ${DOCKER_CONTAINER} browserstack-sdk pytest ./test/test_habit.py:TestStartPage:test_click_skip_onboarding''' // Запустите тесты внутри контейнера
+//                 }
+//             }
+//             post {
+//                 failure {
+//                     echo 'Final cleanup in post section...'
+//                     // В данном случае мы также можем делать финальную очистку
+//                     sh 'docker stop ${DOCKER_CONTAINER} || true'
+//                     sh 'docker rm ${DOCKER_CONTAINER} || true'
+//                 }
+//             }
+//         }
 
         stage('Stop and Remove Container') {
                 steps {
