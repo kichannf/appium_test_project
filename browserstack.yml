@@ -1,21 +1,11 @@
-#userName: ${BROWSERSTACK_USERNAME}
-#accessKey: ${BROWSERSTACK_ACCESS_KEY}
-userName: nikki_mSdyPW
-accessKey: Ae6uoWXuzi8Pq9p4pLw4
+userName: ${BROWSERSTACK_USERNAME}
+accessKey: ${BROWSERSTACK_ACCESS_KEY}
 framework: pytest
 app: .\src\app\Habitica_4.3.3_apkcombo.com.apk
-#app: C:\kichan\dev\appiumTestProject\src\app\Habitica_4.3.3_apkcombo.com.apk
-#app: C://kichan//dev//appiumTestProject//src//app
 platforms:
   - platformName: android
     deviceName: Samsung Galaxy S22 Ultra
     platformVersion: 12.0
-#  - platformName: android
-#    deviceName: Google Pixel 7 Pro
-#    platformVersion: 13.0
-#  - platformName: android
-#    deviceName: OnePlus 11R
-#    platformVersion: 13.0
 parallelsPerPlatform: 1        
 browserstackLocal: true
 browserStackLocalOptions:
